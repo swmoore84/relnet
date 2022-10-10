@@ -48,6 +48,16 @@ RSpec.describe UserPermissionToProject do
             expect(subject.run).to eq(true)
           end
         end
+
+        context "and the project was created by the user" do
+          before do
+            project.update(user: user)
+          end
+
+          it "returns true" do
+            expect(subject.run).to eq(true)
+          end
+        end
       end
     end
 
