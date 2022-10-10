@@ -18,7 +18,7 @@ class ProjectsController < ProjectsBaseController
   end
 
   def create
-    project = Project.create!(
+    project = current_user.projects.create!(
       title: params[:name],
       team: current_user.team,
       public_feed: params[:visibility] == 'Public'
