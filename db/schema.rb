@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_14_080117) do
+ActiveRecord::Schema.define(version: 2022_10_10_065322) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -161,8 +161,10 @@ ActiveRecord::Schema.define(version: 2022_03_14_080117) do
     t.bigint "team_id"
     t.boolean "public_feed", default: false, null: false
     t.boolean "hide_author", default: false, null: false
+    t.bigint "user_id"
     t.index ["public_key"], name: "index_projects_on_public_key", unique: true
     t.index ["team_id"], name: "index_projects_on_team_id"
+    t.index ["user_id"], name: "index_projects_on_user_id"
   end
 
   create_table "prompt_subscriptions", force: :cascade do |t|
@@ -332,6 +334,7 @@ ActiveRecord::Schema.define(version: 2022_03_14_080117) do
   add_foreign_key "project_users", "projects"
   add_foreign_key "project_users", "users"
   add_foreign_key "projects", "teams"
+  add_foreign_key "projects", "users"
   add_foreign_key "prompt_subscriptions", "projects"
   add_foreign_key "prompts", "form_prompt_subscription_reminders"
   add_foreign_key "prompts", "releases", column: "internal_prompt_release_id"
