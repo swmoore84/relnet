@@ -7,6 +7,7 @@ class Project < ApplicationRecord
   has_many :categories
   before_create :generate_public
   belongs_to :team
+  belongs_to :user, optional: true
 
   scope :active, -> { where('projects.active = true') }
 
